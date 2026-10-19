@@ -1,10 +1,11 @@
 package com.example;
 //version 5.5
 
+/*
+NOTE: missing meloetta_pirouette 
+*/
+
 import java.util.Scanner;
-
-//https://pokeapi.co/docs/v2
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -13,7 +14,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,7 +28,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class randomPokemon extends Application{
-    @Override
+    @Override 
     public void start(Stage primaryStage) {
         Scanner input = new Scanner(System.in);
 
@@ -175,44 +175,18 @@ public class randomPokemon extends Application{
         };
         EventHandler<ActionEvent> shinyEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                /*
-                if(pokedex.getShiny(pokedex.name_index1) == null) {
-                    pokedex.pokedex[pokedex.name_index1].shiny = new Image("file:shiny\\" + pokedex.pokedex[pokedex.name_index1].number + ".png");
-                }
-                if(pokedex.getShiny(pokedex.name_index2) == null) {
-                    pokedex.pokedex[pokedex.name_index2].shiny = new Image("file:shiny\\" + pokedex.pokedex[pokedex.name_index2].number + ".png");
-                }
-                if(pokedex.getShiny(pokedex.name_index3) == null) {
-                    pokedex.pokedex[pokedex.name_index3].shiny = new Image("file:shiny\\" + pokedex.pokedex[pokedex.name_index3].number + ".png");
-                }
-                */
-                imageView1.setImage(new Image("file:Sprites\\shiny\\" + pokedex.pokedex[pokedex.name_index1].number + ".png"));
-                imageView2.setImage(new Image("file:Sprites\\shiny\\" + pokedex.pokedex[pokedex.name_index2].number + ".png"));
-                imageView3.setImage(new Image("file:Sprites\\shiny\\" + pokedex.pokedex[pokedex.name_index3].number + ".png"));    
+                imageView1.setImage(pokedex.getShiny(pokedex.name_index1));
+                imageView2.setImage(pokedex.getShiny(pokedex.name_index2));
+                imageView3.setImage(pokedex.getShiny(pokedex.name_index3));    
             }
         };
         EventHandler<ActionEvent> againEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 pokedex.again();
 
-                if(pokedex.getColor(pokedex.name_index1) == null) {
-                    pokedex.pokedex[pokedex.name_index1].color = new Image("file:Sprites\\color\\" + pokedex.pokedex[pokedex.name_index1].number + ".png");
-                    pokedex.pokedex[pokedex.name_index1].initStats();
-                }
-                if(pokedex.getColor(pokedex.name_index2) == null) {
-                    pokedex.pokedex[pokedex.name_index2].color = new Image("file:Sprites\\color\\" + pokedex.pokedex[pokedex.name_index2].number + ".png");
-                    pokedex.pokedex[pokedex.name_index2].initStats();
-
-                }
-                if(pokedex.getColor(pokedex.name_index3) == null) {
-                    pokedex.pokedex[pokedex.name_index3].color = new Image("file:Sprites\\color\\" + pokedex.pokedex[pokedex.name_index3].number + ".png");
-                    pokedex.pokedex[pokedex.name_index3].initStats();
-
-                }
-
-                imageView1.setImage(pokedex.getColor(pokedex.name_index1));
-                imageView2.setImage(pokedex.getColor(pokedex.name_index2));
-                imageView3.setImage(pokedex.getColor(pokedex.name_index3));
+                imageView1.setImage(pokedex.getNormalImage(pokedex.name_index1));
+                imageView2.setImage(pokedex.getNormalImage(pokedex.name_index2)); 
+                imageView3.setImage(pokedex.getNormalImage(pokedex.name_index3));
                 name1.setText(pokedex.getName(pokedex.name_index1).getText());
                 name2.setText(pokedex.getName(pokedex.name_index2).getText());
                 name3.setText(pokedex.getName(pokedex.name_index3).getText());
@@ -233,16 +207,16 @@ public class randomPokemon extends Application{
         };
         EventHandler<ActionEvent> highestStatEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                attribute1.setText(pokedex.getHighestStat(pokedex.pokedex[pokedex.name_index1].stats));
-                attribute2.setText(pokedex.getHighestStat(pokedex.pokedex[pokedex.name_index2].stats));
-                attribute3.setText(pokedex.getHighestStat(pokedex.pokedex[pokedex.name_index3].stats));           
+                attribute1.setText(pokedex.getHighestStat(pokedex.name_index1));
+                attribute2.setText(pokedex.getHighestStat(pokedex.name_index2));
+                attribute3.setText(pokedex.getHighestStat(pokedex.name_index3));           
             }
         };
         EventHandler<ActionEvent> lowestStatEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                attribute1.setText(pokedex.getLowestStat(pokedex.pokedex[pokedex.name_index1].stats));
-                attribute2.setText(pokedex.getLowestStat(pokedex.pokedex[pokedex.name_index2].stats));
-                attribute3.setText(pokedex.getLowestStat(pokedex.pokedex[pokedex.name_index3].stats));              
+                attribute1.setText(pokedex.getLowestStat(pokedex.name_index1));
+                attribute2.setText(pokedex.getLowestStat(pokedex.name_index2));
+                attribute3.setText(pokedex.getLowestStat(pokedex.name_index3));              
             }
         };
 
@@ -297,8 +271,11 @@ public class randomPokemon extends Application{
                 lowestStatButton.setFont(new Font(newVal.doubleValue()/75));
             });
 
+        // initialize the stats of all the pokemon
+        pokedex.initPokedex();
+
         //create a scene
-        Scene scene = new Scene(pane, 800, 500);
+        Scene scene = new Scene(pane, 900, 500);
         primaryStage.setTitle("Random Pokemon Generator");
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -919,25 +919,21 @@ static Pokemon ogerpon_cornerstone_mask = new Pokemon(10275,"Cornerstone Mask Og
     public Pokemon[] getPokedex() {
         return pokedex;
     }
-    public Text getName(int index) {
-        Text text = new Text(pokedex[index].name);
+    public String getName(int index) {
+        return pokedex[index].name;
+    }
+    public String getHeight(int index) {
+        return pokedex[index].height;
+    }
+    public String getWeight(int index) {
+        return pokedex[index].weight;
+    }
+    public String getNumber(int index) {
+        String text = Integer.toString(pokedex[index].number);
         return text;
     }
-    public Text getHeight(int index) {
-        Text text = new Text(pokedex[index].height);
-        return text;
-    }
-    public Text getWeight(int index) {
-        Text text = new Text(pokedex[index].weight);
-        return text;
-    }
-    public Text getNumber(int index) {
-        Text text = new Text(Integer.toString(pokedex[index].number));
-        return text;
-    }
-    public Text getJapaneseName(int index) {
-        Text text = new Text(pokedex[index].japanese);
-        return text;
+    public String getJapaneseName(int index) {
+        return pokedex[index].japanese;
     }
     public Image getNormalImage(int index) {
         return pokedex[index].getNormalImage();
@@ -945,8 +941,8 @@ static Pokemon ogerpon_cornerstone_mask = new Pokemon(10275,"Cornerstone Mask Og
     public Image getShiny(int index) {
         return pokedex[index].getShinyImage();
     }
-    public Text getSpecies(int index) {
-        return new Text(pokedex[index].getSpecies());
+    public String getSpecies(int index) {
+        return pokedex[index].getSpecies();
     }
     public String getHighestStat(int index) {
         return pokedex[index].getHighestStat();

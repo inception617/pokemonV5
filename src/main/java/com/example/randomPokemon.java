@@ -78,32 +78,25 @@ public class randomPokemon extends Application{
         menuButton.getItems().addAll(blackItem, whiteItem, redItem, greenItem, blueItem, customItem);
 
         pane.addRow(1, menuButton);
-
         column1.getChildren().add(imageView1);
         column2.getChildren().add(imageView2);
         column3.getChildren().add(imageView3);
 
-        Text name1 = new Text(pokedex.pokedex[pokedex.name_index1].name);
-        name1.setFont(new Font(25));
+        Text name1 = new Text();
         column1.getChildren().add(name1);
         Text attribute1 = new Text();
-        attribute1.setFont(new Font(25));
         column1.getChildren().add(attribute1);
         column1.setAlignment(Pos.CENTER);
 
-        Text name2 = new Text(pokedex.pokedex[pokedex.name_index2].name);
-        name2.setFont(new Font(25));
+        Text name2 = new Text();
         column2.getChildren().add(name2);
         Text attribute2 = new Text();
-        attribute2.setFont(new Font(25));
         column2.getChildren().add(attribute2);
         column2.setAlignment(Pos.CENTER);
 
-        Text name3 = new Text(pokedex.pokedex[pokedex.name_index3].name);
-        name3.setFont(new Font(25));
+        Text name3 = new Text();
         column3.getChildren().add(name3);
         Text attribute3 = new Text();
-        attribute3.setFont(new Font(25));
         column3.getChildren().add(attribute3);
         column3.setAlignment(Pos.CENTER);
 
@@ -123,7 +116,7 @@ public class randomPokemon extends Application{
         buttonGroup1.getChildren().add(weightButton);
         Button numberButton = new Button("Number");
         buttonGroup2.getChildren().add(numberButton);
-        Button japaneseNameButton = new Button("Japanese Name");
+        Button japaneseNameButton = new Button("Japanese \nName");
         buttonGroup2.getChildren().add(japaneseNameButton);
         Button shinyButton = new Button("Shiny");
         buttonGroup3.getChildren().add(shinyButton);
@@ -146,31 +139,31 @@ public class randomPokemon extends Application{
 
         EventHandler<ActionEvent> heightEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                attribute1.setText(pokedex.getHeight(pokedex.name_index1).getText());
-                attribute2.setText(pokedex.getHeight(pokedex.name_index2).getText());
-                attribute3.setText(pokedex.getHeight(pokedex.name_index3).getText());
+                attribute1.setText(pokedex.getHeight(pokedex.name_index1));
+                attribute2.setText(pokedex.getHeight(pokedex.name_index2));
+                attribute3.setText(pokedex.getHeight(pokedex.name_index3));
                 
             }
         };
         EventHandler<ActionEvent> weightEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                attribute1.setText(pokedex.getWeight(pokedex.name_index1).getText());
-                attribute2.setText(pokedex.getWeight(pokedex.name_index2).getText());
-                attribute3.setText(pokedex.getWeight(pokedex.name_index3).getText());        
+                attribute1.setText(pokedex.getWeight(pokedex.name_index1));
+                attribute2.setText(pokedex.getWeight(pokedex.name_index2));
+                attribute3.setText(pokedex.getWeight(pokedex.name_index3));        
             }
         };
         EventHandler<ActionEvent> numberEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                attribute1.setText(pokedex.getNumber(pokedex.name_index1).getText());
-                attribute2.setText(pokedex.getNumber(pokedex.name_index2).getText());
-                attribute3.setText(pokedex.getNumber(pokedex.name_index3).getText());
+                attribute1.setText(pokedex.getNumber(pokedex.name_index1));
+                attribute2.setText(pokedex.getNumber(pokedex.name_index2));
+                attribute3.setText(pokedex.getNumber(pokedex.name_index3));
             }
         };
         EventHandler<ActionEvent> japaneseNameEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                attribute1.setText(pokedex.getJapaneseName(pokedex.name_index1).getText());
-                attribute2.setText(pokedex.getJapaneseName(pokedex.name_index2).getText());
-                attribute3.setText(pokedex.getJapaneseName(pokedex.name_index3).getText());              
+                attribute1.setText(pokedex.getJapaneseName(pokedex.name_index1));
+                attribute2.setText(pokedex.getJapaneseName(pokedex.name_index2));
+                attribute3.setText(pokedex.getJapaneseName(pokedex.name_index3));              
             }
         };
         EventHandler<ActionEvent> shinyEvent = new EventHandler<ActionEvent>() {
@@ -187,9 +180,9 @@ public class randomPokemon extends Application{
                 imageView1.setImage(pokedex.getNormalImage(pokedex.name_index1));
                 imageView2.setImage(pokedex.getNormalImage(pokedex.name_index2)); 
                 imageView3.setImage(pokedex.getNormalImage(pokedex.name_index3));
-                name1.setText(pokedex.getName(pokedex.name_index1).getText());
-                name2.setText(pokedex.getName(pokedex.name_index2).getText());
-                name3.setText(pokedex.getName(pokedex.name_index3).getText());
+                name1.setText(pokedex.getName(pokedex.name_index1));
+                name2.setText(pokedex.getName(pokedex.name_index2));
+                name3.setText(pokedex.getName(pokedex.name_index3));
                 attribute1.setText(null);
                 attribute2.setText(null);
                 attribute3.setText(null);
@@ -200,9 +193,9 @@ public class randomPokemon extends Application{
         //second row button actions
         EventHandler<ActionEvent> speciesEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                attribute1.setText(pokedex.getSpecies(pokedex.name_index1).getText());
-                attribute2.setText(pokedex.getSpecies(pokedex.name_index2).getText());
-                attribute3.setText(pokedex.getSpecies(pokedex.name_index3).getText());             
+                attribute1.setText(pokedex.getSpecies(pokedex.name_index1));
+                attribute2.setText(pokedex.getSpecies(pokedex.name_index2));
+                attribute3.setText(pokedex.getSpecies(pokedex.name_index3));             
             }
         };
         EventHandler<ActionEvent> highestStatEvent = new EventHandler<ActionEvent>() {
@@ -233,42 +226,50 @@ public class randomPokemon extends Application{
 
         //dynamically change the sizes of the buttons and text based on the size of the window
             pane.widthProperty().addListener((obs, oldVal, newVal) -> {
-                menuButton.setFont(new Font(newVal.doubleValue()/75));
-                name1.setFont(new Font(newVal.doubleValue()/50));
-                name2.setFont(new Font(newVal.doubleValue()/50));
-                name3.setFont(new Font(newVal.doubleValue()/50));
-                menuButton.setPrefWidth(newVal.doubleValue()/7);
-                attribute1.setFont(new Font(newVal.doubleValue()/50));
-                attribute2.setFont(new Font(newVal.doubleValue()/50));
-                attribute3.setFont(new Font(newVal.doubleValue()/50));
-                heightButton.setPrefWidth(newVal.doubleValue()/10);
-                weightButton.setPrefWidth(newVal.doubleValue()/10);
-                numberButton.setPrefWidth(newVal.doubleValue()/10);
-                japaneseNameButton.setPrefWidth(newVal.doubleValue()/10);
-                shinyButton.setPrefWidth(newVal.doubleValue()/10);
-                againButton.setPrefWidth(newVal.doubleValue()/10);
-                speciesButton.setPrefWidth(newVal.doubleValue()/10);
-                highestStatButton.setPrefWidth(newVal.doubleValue()/10);
-                lowestStatButton.setPrefWidth(newVal.doubleValue()/10);
-                menuButton.setPrefHeight(newVal.doubleValue()/12);
-                heightButton.setPrefHeight(newVal.doubleValue()/12);
-                weightButton.setPrefHeight(newVal.doubleValue()/12);
-                numberButton.setPrefHeight(newVal.doubleValue()/12);
-                japaneseNameButton.setPrefHeight(newVal.doubleValue()/12);
-                shinyButton.setPrefHeight(newVal.doubleValue()/12);
-                againButton.setPrefHeight(newVal.doubleValue()/12);
-                speciesButton.setPrefHeight(newVal.doubleValue()/12);
-                highestStatButton.setPrefHeight(newVal.doubleValue()/12);
-                lowestStatButton.setPrefHeight(newVal.doubleValue()/12);
-                heightButton.setFont(new Font(newVal.doubleValue()/75));
-                weightButton.setFont(new Font(newVal.doubleValue()/75));
-                numberButton.setFont(new Font(newVal.doubleValue()/75));
-                japaneseNameButton.setFont(new Font(newVal.doubleValue()/75));
-                shinyButton.setFont(new Font(newVal.doubleValue()/75));
-                againButton.setFont(new Font(newVal.doubleValue()/75));
-                speciesButton.setFont(new Font(newVal.doubleValue()/75));
-                highestStatButton.setFont(new Font(newVal.doubleValue()/75));
-                lowestStatButton.setFont(new Font(newVal.doubleValue()/75));
+                Font buttonFont = new Font(newVal.doubleValue()/70);
+                Font labelFont = new Font(newVal.doubleValue()/45);
+                double width = newVal.doubleValue()/10;
+                double height = newVal.doubleValue()/12;
+
+                menuButton.setFont(buttonFont);
+                menuButton.setPrefWidth(newVal.doubleValue()/8);
+
+                name1.setFont(labelFont);
+                name2.setFont(labelFont);
+                name3.setFont(labelFont);
+                attribute1.setFont(labelFont);
+                attribute2.setFont(labelFont);
+                attribute3.setFont(labelFont);
+                heightButton.setPrefWidth(width);
+                weightButton.setPrefWidth(width);
+                numberButton.setPrefWidth(width);
+                japaneseNameButton.setPrefWidth(width);
+                shinyButton.setPrefWidth(width);
+                againButton.setPrefWidth(width);
+                speciesButton.setPrefWidth(width);
+                highestStatButton.setPrefWidth(width);
+                lowestStatButton.setPrefWidth(width);
+
+                menuButton.setPrefHeight(height);
+                heightButton.setPrefHeight(height);
+                weightButton.setPrefHeight(height);
+                numberButton.setPrefHeight(height);
+                japaneseNameButton.setPrefHeight(height);
+                shinyButton.setPrefHeight(height);
+                againButton.setPrefHeight(height);
+                speciesButton.setPrefHeight(height);
+                highestStatButton.setPrefHeight(height);
+                lowestStatButton.setPrefHeight(height);
+
+                heightButton.setFont(buttonFont);
+                weightButton.setFont(buttonFont);
+                numberButton.setFont(buttonFont);
+                japaneseNameButton.setFont(buttonFont);
+                shinyButton.setFont(buttonFont);
+                againButton.setFont(buttonFont);
+                speciesButton.setFont(buttonFont);
+                highestStatButton.setFont(buttonFont);
+                lowestStatButton.setFont(buttonFont);
             });
 
         // initialize the stats of all the pokemon

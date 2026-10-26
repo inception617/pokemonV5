@@ -1,6 +1,7 @@
 package com.example;
 //version 5.5
 
+import java.util.List;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -10,6 +11,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.ImageView;
@@ -31,7 +33,7 @@ public class randomPokemon extends Application{
         GridPane pane = new GridPane();
         pane.setPadding(new Insets(15, 15, 15, 15));
         pane.setAlignment(Pos.TOP_CENTER );
-        pane.hgapProperty().bind(pane.widthProperty().divide(40));
+        pane.hgapProperty().bind(pane.widthProperty().divide(50));
         pane.setBackground(new Background(new BackgroundFill(Color.color(1, 1, 1), null, null)));
         VBox column1 = new VBox(15);
         VBox column2 = new VBox(15);
@@ -81,8 +83,14 @@ public class randomPokemon extends Application{
         MenuItem blueItem = new MenuItem("Blue");
         MenuItem customItem = new MenuItem("Custom");
 
-        blackItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null))));
-        whiteItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null))));
+        blackItem.setOnAction(e -> {
+            pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+            updateFontColor(pane, name1, name2, name3, attribute1, attribute2, attribute3);
+        });
+        whiteItem.setOnAction(e -> {
+            pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+            updateFontColor(pane, name1, name2, name3, attribute1, attribute2, attribute3);
+        });
         redItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.RED, null, null))));
         greenItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null))));
         blueItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.BLUE, null, null))));
@@ -94,6 +102,7 @@ public class randomPokemon extends Application{
             int b = input.nextInt();
             input.close();
             pane.setBackground(new Background(new BackgroundFill(Color.color(r/255.0, g/255.0, b/255.0), null, null)));
+            updateFontColor(pane, name1, name2, name3, attribute1, attribute2, attribute3);
             });
 
         MenuButton colorMenuButton = new MenuButton("Background \nColor");
@@ -125,8 +134,6 @@ public class randomPokemon extends Application{
 
 
         pane.addRow(0, column1, column2, column3, buttonColumn1, buttonColumn2);
-
-        pane.vgapProperty().bind(pane.heightProperty().divide(35));
 
         EventHandler<ActionEvent> genEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
@@ -332,8 +339,9 @@ public class randomPokemon extends Application{
                 double width = newVal.doubleValue()/7;
                 double height = newVal.doubleValue()/21;
 
+
                 colorMenuButton.setFont(buttonFont);
-                colorMenuButton.setPrefWidth(newVal.doubleValue()/7);
+                colorMenuButton.setPrefWidth(width);
 
                 name1.setFont(labelFont);
                 name2.setFont(labelFont);
@@ -341,6 +349,7 @@ public class randomPokemon extends Application{
                 attribute1.setFont(labelFont);
                 attribute2.setFont(labelFont);
                 attribute3.setFont(labelFont);
+
                 heightButton.setPrefWidth(width);
                 weightButton.setPrefWidth(width);
                 numberButton.setPrefWidth(width);
@@ -417,6 +426,25 @@ public class randomPokemon extends Application{
             numberStr = "0" + numberStr;
         }
         return numberStr;
+    }
+
+    // change the color of the font depending on whether the background is light or dark
+    public void updateFontColor(Pane pane, Text name1, Text name2, Text name3, Text attribute1, Text attribute2, Text attribute3) {
+        Color textColor;
+        Paint paint = pane.getBackground().getFills().get(0).getFill();
+        double rgb = ((Color) paint).getRed() + ((Color) paint).getGreen() +((Color) paint).getBlue();
+        if (rgb < 1.5) {
+            textColor = Color.WHITE;
+        }
+        else {
+            textColor = Color.BLACK;
+        }
+        name1.setFill(textColor);
+        name2.setFill(textColor);
+        name3.setFill(textColor);
+        attribute1.setFill(textColor);
+        attribute2.setFill(textColor);
+        attribute3.setFill(textColor);
     }
 
     public static void main(String[] args) {

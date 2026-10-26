@@ -38,13 +38,13 @@ public class randomPokemon extends Application{
         VBox column3 = new VBox(15);
 
         ImageView imageView1 = new ImageView();
-        imageView1.fitWidthProperty().bind(pane.widthProperty().divide(4.5));
+        imageView1.fitWidthProperty().bind(pane.widthProperty().divide(4.25));
         imageView1.setPreserveRatio(true);
         ImageView imageView2 = new ImageView();
-        imageView2.fitWidthProperty().bind(pane.widthProperty().divide(4.5));
+        imageView2.fitWidthProperty().bind(pane.widthProperty().divide(4.25));
         imageView2.setPreserveRatio(true);
         ImageView imageView3 = new ImageView();
-        imageView3.fitWidthProperty().bind(pane.widthProperty().divide(4.5));
+        imageView3.fitWidthProperty().bind(pane.widthProperty().divide(4.25));
         imageView3.setPreserveRatio(true);
 
         //pane.addRow(1, colorMenuButton);
@@ -330,7 +330,7 @@ public class randomPokemon extends Application{
                 Font buttonFont = new Font(newVal.doubleValue()/72);
                 Font labelFont = new Font(newVal.doubleValue()/45);
                 double width = newVal.doubleValue()/7;
-                double height = newVal.doubleValue()/14;
+                double height = newVal.doubleValue()/21;
 
                 colorMenuButton.setFont(buttonFont);
                 colorMenuButton.setPrefWidth(newVal.doubleValue()/7);
@@ -350,6 +350,15 @@ public class randomPokemon extends Application{
                 speciesButton.setPrefWidth(width);
                 highestStatButton.setPrefWidth(width);
                 lowestStatButton.setPrefWidth(width);
+                dexEntriesButton.setPrefWidth(width);
+                genButton.setPrefWidth(width);
+                eggGroupsButton.setPrefWidth(width);
+                BSTButton.setPrefWidth(width);
+                abilitiesButton.setPrefWidth(width);
+                lastMoveButton.setPrefWidth(width);
+                colorButton.setPrefWidth(width);
+                shapeButton.setPrefWidth(width);
+
 
                 colorMenuButton.setPrefHeight(height);
                 heightButton.setPrefHeight(height);
@@ -361,6 +370,14 @@ public class randomPokemon extends Application{
                 speciesButton.setPrefHeight(height);
                 highestStatButton.setPrefHeight(height);
                 lowestStatButton.setPrefHeight(height);
+                dexEntriesButton.setPrefHeight(height);
+                genButton.setPrefHeight(height);
+                eggGroupsButton.setPrefHeight(height);
+                BSTButton.setPrefHeight(height);
+                abilitiesButton.setPrefHeight(height);
+                lastMoveButton.setPrefHeight(height);
+                colorButton.setPrefHeight(height);
+                shapeButton.setPrefHeight(height);
 
                 heightButton.setFont(buttonFont);
                 weightButton.setFont(buttonFont);
@@ -371,6 +388,14 @@ public class randomPokemon extends Application{
                 speciesButton.setFont(buttonFont);
                 highestStatButton.setFont(buttonFont);
                 lowestStatButton.setFont(buttonFont);
+                dexEntriesButton.setFont(buttonFont);
+                genButton.setFont(buttonFont);
+                eggGroupsButton.setFont(buttonFont);
+                BSTButton.setFont(buttonFont);
+                abilitiesButton.setFont(buttonFont);
+                lastMoveButton.setFont(buttonFont);
+                colorButton.setFont(buttonFont);
+                shapeButton.setFont(buttonFont);
             });
 
         // initialize the stats of all the pokemon

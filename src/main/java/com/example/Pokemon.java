@@ -128,9 +128,9 @@ public class Pokemon {
         this.gen = Integer.parseInt(attributes[2]);
         this.japaneseName = attributes[4];
         this.species = attributes[5].replace("\"", "");
-        double heightNum = Double.parseDouble(attributes[6]) * 0.328 + 0.2;                 // convert height from .1 meters to feet and inches
+        double heightNum = Double.parseDouble(attributes[6]) * 0.328 + .05;                 // convert height from .1 meters to feet and inches
         String feet = String.valueOf((int)(heightNum));   
-        String inches = String.valueOf((int)(heightNum - (int)(heightNum)));                             
+        String inches = String.valueOf((int)(((heightNum) - (int)(heightNum)) * 12));                           
         this.height = feet + "' " + inches + "\"";
         this.weight = String.valueOf(Double.parseDouble(attributes[7]) * 0.22) + " lbs";    // convert weight from .1 kilograms to lbls
         // use replace to remove the quotes that surround certain attributes

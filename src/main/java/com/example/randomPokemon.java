@@ -1,10 +1,6 @@
 package com.example;
 //version 5.5
 
-/*
-NOTE: missing meloetta_pirouette 
-*/
-
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.HBox;
-import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -30,8 +26,6 @@ import javafx.event.EventHandler;
 public class randomPokemon extends Application{
     @Override 
     public void start(Stage primaryStage) {
-        Scanner input = new Scanner(System.in);
-
         Pokedex pokedex = new Pokedex();
 
         GridPane pane = new GridPane();
@@ -44,40 +38,16 @@ public class randomPokemon extends Application{
         VBox column3 = new VBox(15);
 
         ImageView imageView1 = new ImageView();
-        imageView1.fitWidthProperty().bind(pane.widthProperty().divide(3.5));
+        imageView1.fitWidthProperty().bind(pane.widthProperty().divide(4.5));
         imageView1.setPreserveRatio(true);
         ImageView imageView2 = new ImageView();
-        imageView2.fitWidthProperty().bind(pane.widthProperty().divide(3.5));
+        imageView2.fitWidthProperty().bind(pane.widthProperty().divide(4.5));
         imageView2.setPreserveRatio(true);
         ImageView imageView3 = new ImageView();
-        imageView3.fitWidthProperty().bind(pane.widthProperty().divide(3.5));
+        imageView3.fitWidthProperty().bind(pane.widthProperty().divide(4.5));
         imageView3.setPreserveRatio(true);
 
-        // menu button to change the background color
-        MenuItem blackItem = new MenuItem("Black");
-        MenuItem whiteItem = new MenuItem("White");
-        MenuItem redItem = new MenuItem("Red");
-        MenuItem greenItem = new MenuItem("Green");
-        MenuItem blueItem = new MenuItem("Blue");
-        MenuItem customItem = new MenuItem("Custom");
-
-        blackItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null))));
-        whiteItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null))));
-        redItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.RED, null, null))));
-        greenItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null))));
-        blueItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.BLUE, null, null))));
-        customItem.setOnAction(e -> {
-            System.out.println("enter three values between 0 - 255");
-            int r = input.nextInt();
-            int g = input.nextInt();
-            int b = input.nextInt();
-            pane.setBackground(new Background(new BackgroundFill(Color.color(r/255.0, g/255.0, b/255.0), null, null)));
-            });
-
-        MenuButton menuButton = new MenuButton("Change Color");
-        menuButton.getItems().addAll(blackItem, whiteItem, redItem, greenItem, blueItem, customItem);
-
-        pane.addRow(1, menuButton);
+        //pane.addRow(1, colorMenuButton);
         column1.getChildren().add(imageView1);
         column2.getChildren().add(imageView2);
         column3.getChildren().add(imageView3);
@@ -100,43 +70,71 @@ public class randomPokemon extends Application{
         column3.getChildren().add(attribute3);
         column3.setAlignment(Pos.CENTER);
 
-        pane.addRow(2, column1, column2, column3);
+        VBox buttonColumn1 = new VBox(10);
+        VBox buttonColumn2 = new VBox(10);
 
-        HBox buttonGroup1 = new HBox(15);
-        HBox buttonGroup2 = new HBox(15);
-        HBox buttonGroup3 = new HBox(15);
-        
-        buttonGroup1.setAlignment(Pos.CENTER);
-        buttonGroup2.setAlignment(Pos.CENTER);
-        buttonGroup3.setAlignment(Pos.CENTER);
-        
-        Button heightButton = new Button("Height");
-        buttonGroup1.getChildren().add(heightButton);
-        Button weightButton = new Button("Weight");
-        buttonGroup1.getChildren().add(weightButton);
+        // menu button to change the background color
+        MenuItem blackItem = new MenuItem("Black");
+        MenuItem whiteItem = new MenuItem("White");
+        MenuItem redItem = new MenuItem("Red");
+        MenuItem greenItem = new MenuItem("Green");
+        MenuItem blueItem = new MenuItem("Blue");
+        MenuItem customItem = new MenuItem("Custom");
+
+        blackItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null))));
+        whiteItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null))));
+        redItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.RED, null, null))));
+        greenItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null))));
+        blueItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.BLUE, null, null))));
+        customItem.setOnAction(e -> {
+            System.out.println("enter three values between 0 - 255");
+            Scanner input = new Scanner(System.in);
+            int r = input.nextInt();
+            int g = input.nextInt();
+            int b = input.nextInt();
+            input.close();
+            pane.setBackground(new Background(new BackgroundFill(Color.color(r/255.0, g/255.0, b/255.0), null, null)));
+            });
+
+        MenuButton colorMenuButton = new MenuButton("Background \nColor");
+        colorMenuButton.getItems().addAll(blackItem, whiteItem, redItem, greenItem, blueItem, customItem);
         Button numberButton = new Button("Number");
-        buttonGroup2.getChildren().add(numberButton);
+        Button genButton = new Button("Generation");
         Button japaneseNameButton = new Button("Japanese \nName");
-        buttonGroup2.getChildren().add(japaneseNameButton);
-        Button shinyButton = new Button("Shiny");
-        buttonGroup3.getChildren().add(shinyButton);
-        Button againButton = new Button("Again");
-        buttonGroup3.getChildren().add(againButton);
-
         Button speciesButton = new Button("Species");
-        Button highestStatButton = new Button("Highest Stat");
-        Button lowestStatButton = new Button("Lowest Stat");
-        
-        pane.addRow(3, buttonGroup1, buttonGroup2, buttonGroup3);
-        pane.addRow(4, speciesButton, highestStatButton, lowestStatButton);
+        Button heightButton = new Button("Height");
+        Button weightButton = new Button("Weight");
+        Button eggGroupsButton = new Button("Egg \nGroups");
+        Button shinyButton = new Button("Shiny");
 
-        // center speciesButton, highestStatButton, lowestStatButton
-        GridPane.setHalignment(speciesButton, javafx.geometry.HPos.CENTER);
-        GridPane.setHalignment(highestStatButton, javafx.geometry.HPos.CENTER);
-        GridPane.setHalignment(lowestStatButton, javafx.geometry.HPos.CENTER);
+        // add the first column of buttons to the pane
+        buttonColumn1.getChildren().addAll(colorMenuButton, numberButton, genButton, japaneseNameButton, speciesButton, heightButton, weightButton, eggGroupsButton, shinyButton);
+        
+        Button againButton = new Button("Again");
+        Button highestStatButton = new Button("Highest \nStat");
+        Button lowestStatButton = new Button("Lowest \nStat");
+        Button BSTButton = new Button("BST");
+        Button abilitiesButton = new Button("Abilities");
+        Button lastMoveButton = new Button("Last Move");
+        Button colorButton = new Button("Color");
+        Button shapeButton = new Button("Shape");
+        Button dexEntriesButton = new Button("Pokedex \nEntries");
+
+        // add the second column of buttons to the pane
+        buttonColumn2.getChildren().addAll(againButton, highestStatButton, lowestStatButton, BSTButton, abilitiesButton, lastMoveButton, colorButton, shapeButton, dexEntriesButton);
+
+
+        pane.addRow(0, column1, column2, column3, buttonColumn1, buttonColumn2);
 
         pane.vgapProperty().bind(pane.heightProperty().divide(35));
 
+        EventHandler<ActionEvent> genEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                attribute1.setText(String.valueOf(pokedex.getPokedex()[pokedex.name_index1].getGen()));
+                attribute2.setText(String.valueOf(pokedex.getPokedex()[pokedex.name_index2].getGen()));
+                attribute3.setText(String.valueOf(pokedex.getPokedex()[pokedex.name_index3].getGen()));              
+            }
+        };
         EventHandler<ActionEvent> heightEvent = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 attribute1.setText(pokedex.getHeight(pokedex.name_index1));
@@ -150,6 +148,27 @@ public class randomPokemon extends Application{
                 attribute1.setText(pokedex.getWeight(pokedex.name_index1));
                 attribute2.setText(pokedex.getWeight(pokedex.name_index2));
                 attribute3.setText(pokedex.getWeight(pokedex.name_index3));        
+            }
+        };
+        EventHandler<ActionEvent> eggGroupsEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                String string1 = pokedex.getPokedex()[pokedex.name_index1].getEggGroups()[0];
+                String string2 = pokedex.getPokedex()[pokedex.name_index2].getEggGroups()[0];
+                String string3 = pokedex.getPokedex()[pokedex.name_index3].getEggGroups()[0];
+
+                if (pokedex.getPokedex()[pokedex.name_index1].getEggGroups().length > 1) {
+                    string1 += ", " + (pokedex.getPokedex()[pokedex.name_index1].getEggGroups()[1]);
+                }
+                if (pokedex.getPokedex()[pokedex.name_index2].getEggGroups().length > 1) {
+                    string2 += ", " + (pokedex.getPokedex()[pokedex.name_index2].getEggGroups()[1]);
+                }
+                if (pokedex.getPokedex()[pokedex.name_index3].getEggGroups().length > 1) {
+                    string3 += ", " + (pokedex.getPokedex()[pokedex.name_index3].getEggGroups()[1]);
+                }
+                attribute1.setText(string1);
+                attribute2.setText(string2);
+                attribute3.setText(string3);
+            
             }
         };
         EventHandler<ActionEvent> numberEvent = new EventHandler<ActionEvent>() {
@@ -171,6 +190,32 @@ public class randomPokemon extends Application{
                 imageView1.setImage(pokedex.getShiny(pokedex.name_index1));
                 imageView2.setImage(pokedex.getShiny(pokedex.name_index2));
                 imageView3.setImage(pokedex.getShiny(pokedex.name_index3));    
+            }
+        };
+        EventHandler<ActionEvent> dexEntriesEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                Stage dexStage = new Stage();
+                Pane dexPane = new Pane();
+                HBox dexHBox = new HBox(5);
+                dexHBox.setPadding(new Insets(10));
+                VBox dexCoulmn1 = new VBox();
+                VBox dexCoulmn2 = new VBox();
+                VBox dexCoulmn3 = new VBox();
+
+                dexCoulmn1.getChildren().add(new Text(pokedex.getName(pokedex.name_index1)));
+                dexCoulmn1.getChildren().add(new Text(pokedex.getPokedex()[pokedex.name_index1].getDexEntries()));
+                dexCoulmn2.getChildren().add(new Text(pokedex.getName(pokedex.name_index2)));
+                dexCoulmn2.getChildren().add(new Text(pokedex.getPokedex()[pokedex.name_index2].getDexEntries()));   
+                dexCoulmn3.getChildren().add(new Text(pokedex.getName(pokedex.name_index3)));
+                dexCoulmn3.getChildren().add(new Text(pokedex.getPokedex()[pokedex.name_index3].getDexEntries()));             
+
+                dexHBox.getChildren().addAll(dexCoulmn1, dexCoulmn2, dexCoulmn3);
+                dexPane.getChildren().add(dexHBox);
+                
+                Scene dexScene = new Scene(dexPane, 1280, 720);
+                dexStage.setTitle("Pokedex Entries");
+                dexStage.setScene(dexScene);
+                dexStage.show();
             }
         };
         EventHandler<ActionEvent> againEvent = new EventHandler<ActionEvent>() {
@@ -212,6 +257,55 @@ public class randomPokemon extends Application{
                 attribute3.setText(pokedex.getLowestStat(pokedex.name_index3));              
             }
         };
+        EventHandler<ActionEvent> BSTEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                attribute1.setText(String.valueOf(pokedex.getPokedex()[pokedex.name_index1].getBST()));
+                attribute2.setText(String.valueOf(pokedex.getPokedex()[pokedex.name_index2].getBST()));
+                attribute3.setText(String.valueOf(pokedex.getPokedex()[pokedex.name_index3].getBST()));              
+            }
+        };
+        EventHandler<ActionEvent> abilitiesEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                String string1 = "";
+                String string2 = "";
+                String string3 = "";
+                for (String ability : pokedex.getPokedex()[pokedex.name_index1].getAbilities()) {
+                    string1 += ability + "\n";
+                }
+                for (String ability : pokedex.getPokedex()[pokedex.name_index2].getAbilities()) {
+                    string2 += ability + "\n";
+                }
+                for (String ability : pokedex.getPokedex()[pokedex.name_index3].getAbilities()) {
+                    string3 += ability + "\n";
+                }
+
+                attribute1.setText(string1);
+                attribute2.setText(string2);
+                attribute3.setText(string3);
+            }
+        };
+        EventHandler<ActionEvent> lastMoveEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                attribute1.setText(pokedex.getPokedex()[pokedex.name_index1].getLastMove());
+                attribute2.setText(pokedex.getPokedex()[pokedex.name_index2].getLastMove());
+                attribute3.setText(pokedex.getPokedex()[pokedex.name_index3].getLastMove());              
+            }
+        };
+        EventHandler<ActionEvent> colorEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                attribute1.setText(pokedex.getPokedex()[pokedex.name_index1].getColor());
+                attribute2.setText(pokedex.getPokedex()[pokedex.name_index2].getColor());
+                attribute3.setText(pokedex.getPokedex()[pokedex.name_index3].getColor());              
+            }
+        };
+        EventHandler<ActionEvent> shapeEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                attribute1.setText(pokedex.getPokedex()[pokedex.name_index1].getShape());
+                attribute2.setText(pokedex.getPokedex()[pokedex.name_index2].getShape());
+                attribute3.setText(pokedex.getPokedex()[pokedex.name_index3].getShape());              
+            }
+        };
+
 
         heightButton.setOnAction(heightEvent);
         weightButton.setOnAction(weightEvent);
@@ -219,20 +313,27 @@ public class randomPokemon extends Application{
         japaneseNameButton.setOnAction(japaneseNameEvent);
         shinyButton.setOnAction(shinyEvent);
         againButton.setOnAction(againEvent);
-
         speciesButton.setOnAction(speciesEvent);
         highestStatButton.setOnAction(highestStatEvent);
         lowestStatButton.setOnAction(lowestStatEvent);
+        dexEntriesButton.setOnAction(dexEntriesEvent);
+        genButton.setOnAction(genEvent);
+        eggGroupsButton.setOnAction(eggGroupsEvent);
+        BSTButton.setOnAction(BSTEvent);
+        abilitiesButton.setOnAction(abilitiesEvent);
+        lastMoveButton.setOnAction(lastMoveEvent);
+        colorButton.setOnAction(colorEvent);
+        shapeButton.setOnAction(shapeEvent);
 
         //dynamically change the sizes of the buttons and text based on the size of the window
             pane.widthProperty().addListener((obs, oldVal, newVal) -> {
-                Font buttonFont = new Font(newVal.doubleValue()/70);
+                Font buttonFont = new Font(newVal.doubleValue()/72);
                 Font labelFont = new Font(newVal.doubleValue()/45);
-                double width = newVal.doubleValue()/10;
-                double height = newVal.doubleValue()/12;
+                double width = newVal.doubleValue()/7;
+                double height = newVal.doubleValue()/14;
 
-                menuButton.setFont(buttonFont);
-                menuButton.setPrefWidth(newVal.doubleValue()/8);
+                colorMenuButton.setFont(buttonFont);
+                colorMenuButton.setPrefWidth(newVal.doubleValue()/7);
 
                 name1.setFont(labelFont);
                 name2.setFont(labelFont);
@@ -250,7 +351,7 @@ public class randomPokemon extends Application{
                 highestStatButton.setPrefWidth(width);
                 lowestStatButton.setPrefWidth(width);
 
-                menuButton.setPrefHeight(height);
+                colorMenuButton.setPrefHeight(height);
                 heightButton.setPrefHeight(height);
                 weightButton.setPrefHeight(height);
                 numberButton.setPrefHeight(height);
@@ -276,7 +377,7 @@ public class randomPokemon extends Application{
         pokedex.initPokedex();
 
         //create a scene
-        Scene scene = new Scene(pane, 900, 500);
+        Scene scene = new Scene(pane,1280, 720);
         primaryStage.setTitle("Random Pokemon Generator");
         primaryStage.setScene(scene);
         primaryStage.show();

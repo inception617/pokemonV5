@@ -933,7 +933,7 @@ static Pokemon ogerpon_cornerstone_mask = new Pokemon(10275,"Cornerstone Mask Og
         return text;
     }
     public String getJapaneseName(int index) {
-        return pokedex[index].japanese;
+        return pokedex[index].japaneseName;
     }
     public Image getNormalImage(int index) {
         return pokedex[index].getNormalImage();

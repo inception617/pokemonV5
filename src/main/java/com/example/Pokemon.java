@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.ArrayList;
+
 import javafx.scene.image.Image;
 
 public class Pokemon {
@@ -7,7 +9,7 @@ public class Pokemon {
     int number = 0;
     int gen = 0;
     String name = "name";
-    String japanese = "japanese";
+    String japaneseName = "japanese";
     String species = "species";
     String height = "height";
     String weight = "weight";
@@ -20,8 +22,7 @@ public class Pokemon {
     String shape = "shape";
     String growthRate = "growth rate";
     String[] eggGroups = new String[2];
-    String dexEntry = "Pokedex entry";
-    String imageName = "default";
+    String dexEntries = "";
     Image normalImage;
     Image shinyImage;
     Type type1;
@@ -40,8 +41,8 @@ public class Pokemon {
         this.weight = weight;
     }
 
-    public void setJapanese(String japanese) {
-        this.japanese = japanese;
+    public void setJapanese(String japaneseName) {
+        this.japaneseName = japaneseName;
     }
 
     public void setType1(Type type1) {
@@ -60,17 +61,56 @@ public class Pokemon {
     public int getId() {
         return this.id;
     }
+    public int getNumber() {
+        return this.number;
+    }
+    public int getGen() {
+        return this.gen;
+    }
     public String getName() {
         return this.name;
     }
+    public String getJapaneseName() {
+        return this.japaneseName;
+    }
     public String getSpecies() {
         return this.species;
+    }
+    public String getHeight() {
+        return this.height;
+    }
+    public String getWeight() {
+        return this.weight;
     }
     public String getHighestStat() {
         return this.highestStat;
     }
     public String getLowestStat() {
         return this.lowestStat;
+    }
+    public int getBST() {
+        return this.BST;
+    }
+    public String[] getAbilities() {
+        return this.abilities;
+    }
+    public String getLastMove() {
+        return this.lastMove;
+    }
+    public String getColor() {
+        return this.color;
+    }
+    public String getShape() {
+        return this.shape;
+    }
+    public String getGrowthRate() {
+        return this.growthRate;
+    }
+    public String[] getEggGroups() {
+        return this.eggGroups;
+    }
+    public String getDexEntries() {
+        return this.dexEntries;
     }
     public Image getNormalImage() {
         if (normalImage == null) {
@@ -86,23 +126,47 @@ public class Pokemon {
     public void initStats(String[] attributes) {
         this.number = Integer.parseInt(attributes[1]);
         this.gen = Integer.parseInt(attributes[2]);
-        this.japanese = attributes[4];
-        this.species = attributes[5];
-        double heightNum = Double.parseDouble(attributes[6]) * 0.328 + 0.2;   // convert height from .1 meters to feet and inches
+        this.japaneseName = attributes[4];
+        this.species = attributes[5].replace("\"", "");
+        double heightNum = Double.parseDouble(attributes[6]) * 0.328 + 0.2;                 // convert height from .1 meters to feet and inches
         String feet = String.valueOf((int)(heightNum));   
         String inches = String.valueOf((int)(heightNum - (int)(heightNum)));                             
         this.height = feet + "' " + inches + "\"";
-        this.weight = String.valueOf(Double.parseDouble(attributes[7]) * 0.22) + " lbs";                // convert weight from .1 kilograms to lbls
-        this.highestStat = attributes[8];
-        this.lowestStat = attributes[9];
+        this.weight = String.valueOf(Double.parseDouble(attributes[7]) * 0.22) + " lbs";    // convert weight from .1 kilograms to lbls
+        // use replace to remove the quotes that surround certain attributes
+        this.highestStat = attributes[8].replace("\"", "");
+        this.lowestStat = attributes[9].replace("\"", "");
         this.BST = Integer.parseInt(attributes[10]);
-        this.abilities = attributes[11].split(":");
-        this.lastMove = attributes[12];
+        this.abilities = attributes[11].replace("\"", "").split(":");
+        this.lastMove = attributes[12].replace("\"", "");
         this.color = attributes[13];
         this.shape = attributes[14];
         this.growthRate = attributes[15];
         this.eggGroups = attributes[16].split(":");
-        this.dexEntry = attributes[17];
+        attributes[17] = attributes[17].replace("\"", "");
+        attributes[17] = attributes[17].replace("\\n", "\n");
+        int n = attributes[17].length();
+        int i = 0;
+        int maxLineLenght = 74;
+        while (i < n) {
+                if ( i + maxLineLenght < attributes[17].length()) {
+                    String sub = attributes[17].substring(i, i + maxLineLenght);
+                    if (sub.contains("\n")) {
+                        this.dexEntries += (sub.substring(0, sub.indexOf("\n")+1));
+                        i += sub.indexOf("\n") + 2;
+                    }
+                    else {
+                        this.dexEntries += (sub + "\n");
+                        i += maxLineLenght;
+                    }
+                }
+                else {
+                    this.dexEntries += (attributes[17].substring(i));
+                    break;
+                }
+
+        }
+
     }
 
     private static String capitilizeFirstLetter(String s) {

@@ -57,7 +57,6 @@ public class randomPokemon extends Application{
         column1.getChildren().add(name1);
         Text attribute1 = new Text();
         ImageView icon1 = new ImageView();
-        icon1.fitWidthProperty().bind(pane.widthProperty().divide(20));
         icon1.setPreserveRatio(true);
         HBox attributeBox1 = new HBox(10);
         attributeBox1.setAlignment(Pos.CENTER);
@@ -69,7 +68,6 @@ public class randomPokemon extends Application{
         column2.getChildren().add(name2);
         Text attribute2 = new Text();
         ImageView icon2 = new ImageView();
-        icon2.fitWidthProperty().bind(pane.widthProperty().divide(20));
         icon2.setPreserveRatio(true);
         HBox attributeBox2 = new HBox(10);
         attributeBox2.setAlignment(Pos.CENTER);
@@ -81,7 +79,6 @@ public class randomPokemon extends Application{
         column3.getChildren().add(name3);
         Text attribute3 = new Text();
         ImageView icon3 = new ImageView();
-        icon3.fitWidthProperty().bind(pane.widthProperty().divide(20));
         icon3.setPreserveRatio(true);
         HBox attributeBox3 = new HBox(10);
         attributeBox3.setAlignment(Pos.CENTER);
@@ -293,9 +290,13 @@ public class randomPokemon extends Application{
                 attribute1.setText(null);
                 attribute2.setText(null);
                 attribute3.setText(null);
+
                 icon1.setImage(null);
                 icon2.setImage(null);
                 icon3.setImage(null);
+                icon1.setFitWidth(0);
+                icon2.setFitWidth(0);
+                icon3.setFitWidth(0);
 
             }
         };
@@ -372,6 +373,9 @@ public class randomPokemon extends Application{
                 icon1.setImage(pokedex.getPokedex()[pokedex.name_index1].getShapeIcon());
                 icon2.setImage(pokedex.getPokedex()[pokedex.name_index2].getShapeIcon());
                 icon3.setImage(pokedex.getPokedex()[pokedex.name_index3].getShapeIcon());
+                icon1.setFitWidth(32);
+                icon2.setFitWidth(32);
+                icon3.setFitWidth(32);
             }
         };
 

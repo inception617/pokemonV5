@@ -22,7 +22,7 @@ public class Pokemon {
     String shape = "shape";
     String growthRate = "growth rate";
     String[] eggGroups = new String[2];
-    String dexEntries = "";
+    String dexEntries = "\t";
     Image normalImage;
     Image shinyImage;
     Type type1;
@@ -151,18 +151,21 @@ public class Pokemon {
         attributes[17] = attributes[17].replace("\\n", "\n");
         int n = attributes[17].length();
         int i = 0;
-        int maxLineLenght = 74;
+        int maxLineLenght = 75;
         while (i < n) {
                 if ( i + maxLineLenght < attributes[17].length()) {
                     String sub = attributes[17].substring(i, i + maxLineLenght);
                     if (sub.contains("\n")) {
-                        this.dexEntries += (sub.substring(0, sub.indexOf("\n")+1));
+                        this.dexEntries += (sub.substring(0, sub.indexOf("\n")+1) + "\t");
                         i += sub.indexOf("\n") + 2;
                     }
                     else {
-                        this.dexEntries += (sub + "\n");
-                        i += maxLineLenght;
+                        String end = sub.substring(sub.length() - 10);
+                        int distanceToSpace = sub.length() - 10 + breakOnSpace(end);
+                        this.dexEntries += (sub.substring(0, distanceToSpace) + "\n");
+                        i += distanceToSpace + 1;
                     }
+
                 }
                 else {
                     this.dexEntries += (attributes[17].substring(i));
@@ -232,5 +235,19 @@ public class Pokemon {
     private static String capitilizeFirstLetter(String s) {
         s = s.replaceFirst(Character.toString(s.charAt(0)), Character.toString(Character.toUpperCase(s.charAt(0))));
         return s;
+    }
+
+    private static int breakOnSpace(String s) {
+        int n = s.length();
+        // check if the substring contains a space
+        if (s.contains(" ")) {
+            // find the location of the space
+            for (int i = 0; i < n; i++) {
+                if (s.charAt(i) == ' ') {
+                    return i;
+                }
+            }
+        }
+        return n;
     }
 }

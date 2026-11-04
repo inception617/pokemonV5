@@ -27,6 +27,7 @@ public class Pokemon {
     Image shinyImage;
     Type type1;
     Type type2;
+    int shapeIconID; 
 
     Pokemon(int id, String name) {
         this.id = id;
@@ -121,6 +122,9 @@ public class Pokemon {
     public Image getShinyImage() {
         return new Image("file:Sprites\\shiny\\" + id + ".png");
     }
+    public Image getShapeIcon() {
+        return new Image("file:Sprites\\shapes\\" + shapeIconID + ".png");
+    }
 
 
     public void initStats(String[] attributes) {
@@ -165,6 +169,62 @@ public class Pokemon {
                     break;
                 }
 
+        }
+        switch (shape) {
+            case "ball":
+                this.shapeIconID = 1;
+                break;
+            case "squiggle":
+                this.shapeIconID = 2;
+                break;
+        
+            case "fish":
+                this.shapeIconID = 3;
+                break;
+        
+            case "arms":
+                this.shapeIconID = 4;
+                break;
+            case "blob":
+                this.shapeIconID = 5;
+                break;
+        
+            case "upright":
+                this.shapeIconID = 6;
+                break;
+        
+            case "legs":
+                this.shapeIconID = 7;
+                break;
+            case "quadruped":
+                this.shapeIconID = 8;
+                break;
+        
+            case "wings":
+                this.shapeIconID = 9;
+                break;
+        
+            case "tentacles":
+                this.shapeIconID = 10;
+                break;
+            case "heads":
+                this.shapeIconID = 11;
+                break;
+        
+            case "humanoid":
+                this.shapeIconID = 12;
+                break;
+        
+            case "bug-wings":
+                this.shapeIconID = 13;
+                break;
+
+            case "armor":
+                this.shapeIconID = 14;
+                break;
+        
+            default:
+                break;
         }
 
     }

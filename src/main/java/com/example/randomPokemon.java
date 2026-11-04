@@ -49,7 +49,6 @@ public class randomPokemon extends Application{
         imageView3.fitWidthProperty().bind(pane.widthProperty().divide(4.25));
         imageView3.setPreserveRatio(true);
 
-        //pane.addRow(1, colorMenuButton);
         column1.getChildren().add(imageView1);
         column2.getChildren().add(imageView2);
         column3.getChildren().add(imageView3);
@@ -57,19 +56,37 @@ public class randomPokemon extends Application{
         Text name1 = new Text();
         column1.getChildren().add(name1);
         Text attribute1 = new Text();
-        column1.getChildren().add(attribute1);
+        ImageView icon1 = new ImageView();
+        icon1.fitWidthProperty().bind(pane.widthProperty().divide(20));
+        icon1.setPreserveRatio(true);
+        HBox attributeBox1 = new HBox(10);
+        attributeBox1.setAlignment(Pos.CENTER);
+        attributeBox1.getChildren().addAll(icon1, attribute1);
+        column1.getChildren().add(attributeBox1);
         column1.setAlignment(Pos.CENTER);
 
         Text name2 = new Text();
         column2.getChildren().add(name2);
         Text attribute2 = new Text();
-        column2.getChildren().add(attribute2);
+        ImageView icon2 = new ImageView();
+        icon2.fitWidthProperty().bind(pane.widthProperty().divide(20));
+        icon2.setPreserveRatio(true);
+        HBox attributeBox2 = new HBox(10);
+        attributeBox2.setAlignment(Pos.CENTER);
+        attributeBox2.getChildren().addAll(icon2, attribute2);
+        column2.getChildren().add(attributeBox2);
         column2.setAlignment(Pos.CENTER);
 
         Text name3 = new Text();
         column3.getChildren().add(name3);
         Text attribute3 = new Text();
-        column3.getChildren().add(attribute3);
+        ImageView icon3 = new ImageView();
+        icon3.fitWidthProperty().bind(pane.widthProperty().divide(20));
+        icon3.setPreserveRatio(true);
+        HBox attributeBox3 = new HBox(10);
+        attributeBox3.setAlignment(Pos.CENTER);
+        attributeBox3.getChildren().addAll(icon3, attribute3);
+        column3.getChildren().add(attributeBox3);
         column3.setAlignment(Pos.CENTER);
 
         VBox buttonColumn1 = new VBox(10);
@@ -276,6 +293,9 @@ public class randomPokemon extends Application{
                 attribute1.setText(null);
                 attribute2.setText(null);
                 attribute3.setText(null);
+                icon1.setImage(null);
+                icon2.setImage(null);
+                icon3.setImage(null);
 
             }
         };
@@ -347,7 +367,11 @@ public class randomPokemon extends Application{
             public void handle(ActionEvent e) {
                 attribute1.setText(pokedex.getPokedex()[pokedex.name_index1].getShape());
                 attribute2.setText(pokedex.getPokedex()[pokedex.name_index2].getShape());
-                attribute3.setText(pokedex.getPokedex()[pokedex.name_index3].getShape());              
+                attribute3.setText(pokedex.getPokedex()[pokedex.name_index3].getShape()); 
+                
+                icon1.setImage(pokedex.getPokedex()[pokedex.name_index1].getShapeIcon());
+                icon2.setImage(pokedex.getPokedex()[pokedex.name_index2].getShapeIcon());
+                icon3.setImage(pokedex.getPokedex()[pokedex.name_index3].getShapeIcon());
             }
         };
 

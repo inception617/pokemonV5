@@ -76,24 +76,10 @@ public class randomPokemon extends Application{
         VBox buttonColumn2 = new VBox(10);
 
         // menu button to change the background color
-        MenuItem blackItem = new MenuItem("Black");
-        MenuItem whiteItem = new MenuItem("White");
-        MenuItem redItem = new MenuItem("Red");
-        MenuItem greenItem = new MenuItem("Green");
-        MenuItem blueItem = new MenuItem("Blue");
-        MenuItem customItem = new MenuItem("Custom");
+        MenuButton colorMenuButton = new MenuButton("Background \nColor");
 
-        blackItem.setOnAction(e -> {
-            pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
-            updateFontColor(pane, name1, name2, name3, attribute1, attribute2, attribute3);
-        });
-        whiteItem.setOnAction(e -> {
-            pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-            updateFontColor(pane, name1, name2, name3, attribute1, attribute2, attribute3);
-        });
-        redItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.RED, null, null))));
-        greenItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null))));
-        blueItem.setOnAction(e -> pane.setBackground(new Background(new BackgroundFill(Color.BLUE, null, null))));
+        // menu item that allows a custom color to be set
+        MenuItem customItem = new MenuItem("Custom");
         customItem.setOnAction(e -> {
             System.out.println("enter three values between 0 - 255");
             Scanner input = new Scanner(System.in);
@@ -105,8 +91,60 @@ public class randomPokemon extends Application{
             updateFontColor(pane, name1, name2, name3, attribute1, attribute2, attribute3);
             });
 
-        MenuButton colorMenuButton = new MenuButton("Background \nColor");
-        colorMenuButton.getItems().addAll(blackItem, whiteItem, redItem, greenItem, blueItem, customItem);
+        // create menu items with the primary colors from all mainline series games
+        String[][] gameColors = {
+                {"Pokémon Red", "DA3914"},
+                {"Pokémon Green", "24A724"},
+                {"Pokémon Blue", "2E50D8"},
+                {"Pokémon Yellow", "FFD733"},
+                {"Pokémon Gold", "DAA520"},
+                {"Pokémon Silver", "C0C0C0"},
+                {"Pokémon Crystal", "4FD9FF"},
+                {"Pokémon Ruby", "CD2236"},
+                {"Pokémon Sapphire", "3D51A7"},
+                {"Pokémon Emerald", "009652"},
+                {"Pokémon FireRed", "F15C01"},
+                {"Pokémon LeafGreen", "9FDC00"},
+                {"Pokémon Diamond", "90BEED"},
+                {"Pokémon Pearl", "DD7CB1"},
+                {"Pokémon Platinum", "A0A08D"},
+                {"Pokémon HeartGold", "E8B502"},
+                {"Pokémon SoulSilver", "AAB9CF"},
+                {"Pokémon Black", "444444"},
+                {"Pokémon White", "E1E1E1"},
+                {"Pokémon Black 2", "303E51"},
+                {"Pokémon White 2", "EBC5C3"},
+                {"Pokémon X", "025DA6"},
+                {"Pokémon Y", "EA1A3E"},
+                {"Pokémon Omega Ruby", "AB2813"},
+                {"Pokémon Alpha Sapphire", "26649C"},
+                {"Pokémon Sun", "F1912B"},
+                {"Pokémon Moon", "5599CA"},
+                {"Pokémon Ultra Sun", "E95B2B"},
+                {"Pokémon Ultra Moon", "226DB5"},
+                {"Pokémon: Let's Go, Pikachu!", "F5DA26"},
+                {"Pokémon: Let's Go, Eevee!", "D4924B"},
+                {"Pokémon Sword", "00A1E9"},
+                {"Pokémon Shield", "BF004F"},
+                {"Pokémon Brilliant Diamond", "44BAE5"},
+                {"Pokémon Shining Pearl", "DA7D99"},
+                {"Pokémon Legends: Arceus", "36597B"},
+                {"Pokémon Scarlet", "F34134"},
+                {"Pokémon Violet", "8334B7"},
+                {"Pokémon Legends: Z-A", "31CA56"},
+                {"Pokémon Winds", "66E7A4"},
+                {"Pokémon Waves", "096BE4"}
+        };
+        for (String[] gameColor : gameColors) {
+            MenuItem gameColorItem = new MenuItem(gameColor[0]);
+            Color backgroundColor = Color.web("#" + gameColor[1]);
+            gameColorItem.setOnAction(e -> {
+                pane.setBackground(new Background(new BackgroundFill(backgroundColor, null, null)));
+                updateFontColor(pane, name1, name2, name3, attribute1, attribute2, attribute3);
+            });
+            colorMenuButton.getItems().add(gameColorItem);
+        }
+        colorMenuButton.getItems().add(customItem);
         Button numberButton = new Button("Number");
         Button genButton = new Button("Generation");
         Button japaneseNameButton = new Button("Japanese \nName");
